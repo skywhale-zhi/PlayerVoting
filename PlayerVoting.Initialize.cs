@@ -70,7 +70,7 @@ namespace PlayerVoting
                     //赞成票必须大于0.并且(总人数不能少于4人,在创建vote就已经判断过了）
                     if (vote.voteFor * 1.0 / vote.voteAll >= config.MiniPassingRateOfVoteForBan_ban投票活动最少通过率)
                     {
-                        vote.banedplayer.Ban("您已被投票踢出！", true);
+                        vote.banedplayer.Ban("您已被投票踢出！");
                         TSPlayer.All.SendMessage("票数已决定本次投票结果，投票结束", new Color(255, 168, 0));
                         TSPlayer.All.SendMessage($"投票结果：{vote.voteFor}赞成，{vote.voteAgainst}反对，{vote.voteAll - vote.voteFor - vote.voteAgainst}弃权，投票通过，已将[{vote.banedplayer.Name}]封禁", new Color(0, 150, 255));
                         TShock.Log.Write($"投票结果：{vote.voteFor}赞成，{vote.voteAgainst}反对，{vote.voteAll - vote.voteFor - vote.voteAgainst}弃权，投票通过，已将[{vote.banedplayer.Name}]封禁", TraceLevel.Info);
@@ -83,7 +83,7 @@ namespace PlayerVoting
                         TShock.Log.Write($"投票结果：{vote.voteFor}赞成，{vote.voteAgainst}反对，{vote.voteAll - vote.voteFor - vote.voteAgainst}弃权，投票未通过，[{vote.banedplayer.Name}]不会被封禁", TraceLevel.Info);
                         vote = null;//重置vote
                     }
-                    else if (vote.Timer > 60 * 15)//如果超时了
+                    else if (vote.Timer > 60 * config.CountdownToVoting_投票倒计时)//如果超时了
                     {
                         TSPlayer.All.SendMessage("投票时间已截止，投票结束", new Color(255, 168, 0));
                         TSPlayer.All.SendMessage($"投票结果：{vote.voteFor}赞成，{vote.voteAgainst}反对，{vote.voteAll - vote.voteFor - vote.voteAgainst}弃权，投票未通过，[{vote.banedplayer.Name}]不会被封禁", new Color(150, 0, 255));
@@ -94,6 +94,59 @@ namespace PlayerVoting
             }
         }
 
+
+        private void OnGameUpdate2(EventArgs args)
+        {
+            if (vote == null)
+                return;
+
+            foreach (TSPlayer player in TShock.Players)
+            {
+                if (player != null && player.IsLoggedIn && vote.type == VoteType.kick)
+                {
+                    bool hastheplayer = false;
+                    foreach (var temp in vote.votePlayers)//循环查找自己是否已投一票过
+                    {
+                        if (temp.uuid == player.UUID)//查看该玩家是否有权限投票
+                        {
+                            hastheplayer = true;
+                        }
+                        if (temp.uuid == player.UUID && temp.vr != VoteResults.abstain)
+                        {
+                            return;//投过了，不再向该玩家发送信息
+                        }
+                    }
+                    //遍历一圈发现有权限投，但是还没投票，那么发送信息，60s发送一次
+                    if (hastheplayer && vote.Timer % 60 == 0)
+                    {
+                        string text = $"kick投票：\n请选择 [/vote yes /vote y 或 /vote no /vote n] 倒计时：{config.CountdownToVoting_投票倒计时 - (int)(vote.Timer / 60)}秒";
+                        player.SendData(PacketTypes.CreateCombatTextExtended, text, (int)new Color(0, 255, 255).packedValue, player.X, player.Y);
+                    }
+                }
+
+                if (player != null && vote.type == VoteType.ban)
+                {
+                    bool hastheplayer = false;
+                    foreach (var temp in vote.votePlayers)//循环查找自己是否已投一票过
+                    {
+                        if (temp.uuid == player.UUID)//查看该玩家是否有权限投票
+                        {
+                            hastheplayer = true;
+                        }
+                        if (temp.uuid == player.UUID && temp.vr != VoteResults.abstain)
+                        {
+                            return;//投过了，不再向该玩家发送信息
+                        }
+                    }
+                    //遍历一圈发现有权限投，但是还没投票，那么发送信息，60s发送一次
+                    if (hastheplayer && vote.Timer % 60 == 0)
+                    {
+                        string text = $"ban投票：\n请选择 [/vote yes 或 /vote no] 倒计时：{config.CountdownToVoting_投票倒计时 - (int)(vote.Timer / 60)}秒";
+                        player.SendData(PacketTypes.CreateCombatTextExtended, text, (int)new Color(0, 255, 0).packedValue, player.X, player.Y);
+                    }
+                }
+            }
+        }
 
         private void Vote(CommandArgs args)
         {

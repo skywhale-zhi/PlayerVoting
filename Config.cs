@@ -14,7 +14,7 @@ namespace PlayerVoting
         {
             if (!File.Exists(configPath))
             {
-                Config config = new Config(3, 0.58, 5, 0.798, new List<string> { "guest", "default", "vip" }, 15);
+                Config config = new Config(3, 0.58, 5, 0.798, new List<string> { "guest", "default", "vip" }, 20);
                 File.WriteAllText(configPath, JsonConvert.SerializeObject(config, Formatting.Indented));
                 return config;
             }
@@ -25,7 +25,7 @@ namespace PlayerVoting
             }
         }
 
-        public Config(int n1, double d1, int n2, double d2, List<string> l1, int n3)
+        public Config(int n1, double d1, int n2, double d2, List<string> l1, long n3)
         {
             MiniNumberOfVoteForKick_kick投票活动最少人数 = n1;
             MiniPassingRateOfVoteForKick_kick投票活动最少通过率 = d1;
@@ -40,6 +40,6 @@ namespace PlayerVoting
         public int MiniNumberOfVoteForBan_ban投票活动最少人数;
         public double MiniPassingRateOfVoteForBan_ban投票活动最少通过率;
         public List<string> GroupsAreVoted_可以被通过的组;
-        public int CountdownToVoting_投票倒计时;
+        public long CountdownToVoting_投票倒计时;
     }
 }

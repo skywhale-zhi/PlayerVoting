@@ -43,7 +43,7 @@
       <HintPath>C:\Users\86199\Desktop\tl\泰拉瑞亚开服工具\插件开发所需要的库文件\库文件4.5.18\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="OTAPI">
-      <HintPath>C:\Users\86199\Desktop\tl\泰拉瑞亚开服工具\插件开发所需要的库文件\库文件4.5.18\OTAPI.dll</HintPath>
+      <HintPath>C:\Users\86199\Desktop\tl\泰拉瑞亚开服工具\插件开发所需要的库文件\库文件5.0\OTAPI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,10 +54,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="TerrariaServer">
-      <HintPath>C:\Users\86199\Desktop\tl\泰拉瑞亚开服工具\插件开发所需要的库文件\库文件4.5.18\TerrariaServer.exe</HintPath>
+      <HintPath>C:\Users\86199\Desktop\tl\泰拉瑞亚开服工具\插件开发所需要的库文件\库文件5.0\TerrariaServer.dll</HintPath>
     </Reference>
     <Reference Include="TShockAPI">
-      <HintPath>C:\Users\86199\Desktop\tl\泰拉瑞亚开服工具\插件开发所需要的库文件\库文件4.5.18\TShockAPI.dll</HintPath>
+      <HintPath>C:\Users\86199\Desktop\tl\泰拉瑞亚开服工具\插件开发所需要的库文件\库文件5.0\TShockAPI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

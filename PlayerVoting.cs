@@ -1,9 +1,5 @@
-﻿using Microsoft.Xna.Framework;
-using OTAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Terraria;
 using TerrariaApi.Server;
 using TShockAPI;
@@ -34,8 +30,13 @@ namespace PlayerVoting
         public override void Initialize()
         {
             config = Config.LoadConfig();
-            Hooks.Player.PreUpdate += OnPreUpdate;
+            //ServerApi.Hooks.PlayerUpdatePhysics.Register(this, WhenPlayerUpdate);
+            //GetDataHandlers.PlayerUpdate.Register(WhenPlayerUpdate);
+            //Hooks.Player.PreUpdate += OnPreUpdate;
+            //计算投票和判定的情况
             ServerApi.Hooks.GameUpdate.Register(this, OnGameUpdate);
+            //给未投人发信息
+            ServerApi.Hooks.GameUpdate.Register(this, OnGameUpdate2);
             ServerApi.Hooks.ServerJoin.Register(this, OnServerjoin);
             GeneralHooks.ReloadEvent += OnReload;
 
@@ -57,8 +58,10 @@ namespace PlayerVoting
         {
             if (disposing)
             {
-                Hooks.Player.PreUpdate -= OnPreUpdate;
+                //ServerApi.Hooks.PlayerUpdatePhysics.Deregister(this, WhenPlayerUpdate);
+                //Hooks.Player.PreUpdate -= OnPreUpdate;
                 ServerApi.Hooks.GameUpdate.Deregister(this, OnGameUpdate);
+                ServerApi.Hooks.GameUpdate.Deregister(this, OnGameUpdate2);
                 ServerApi.Hooks.ServerJoin.Deregister(this, OnServerjoin);
                 GeneralHooks.ReloadEvent -= OnReload;
             }
