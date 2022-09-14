@@ -1,5 +1,4 @@
-# PlayerVoting
-# 泰拉瑞亚投票踢人插件
+# PlayerVoting 泰拉瑞亚投票踢人插件
 # 功能
 添加投票系统，允许玩家投票踢人，限制被踢的人再次进入时的时间，或者ban人
 # 权限和指令
@@ -29,7 +28,7 @@
     "default",
     "vip"
   ],
-  "CountdownToVoting_投票倒计时": 15                            //每个投票活动倒计时
+  "CountdownToVoting_投票倒计时": 15                            //每个投票活动倒计时，单位秒
 }
 ```
 
