@@ -19,9 +19,9 @@
 # 配置文件
 ```
 {
-  "MiniNumberOfVoteForKick_kick投票活动最少人数": 0,            //kick投票活动至少几人才可以发起
+  "MiniNumberOfVoteForKick_kick投票活动最少人数": 3,            //kick投票活动至少几人才可以发起
   "MiniPassingRateOfVoteForKick_kick投票活动最少通过率": 0.58,  //kick投票活动至少多少通过率才能通过
-  "MiniNumberOfVoteForBan_ban投票活动最少人数": 0,              //ban投票活动至少几人才可以发起
+  "MiniNumberOfVoteForBan_ban投票活动最少人数": 5,              //ban投票活动至少几人才可以发起
   "MiniPassingRateOfVoteForBan_ban投票活动最少通过率": 0.798,   //ban投票活动至少多少通过率才可以通过
   "GroupsAreVoted_可以被通过的组": [                            //那些组可以被投票活动投出
     "guest",
