@@ -159,9 +159,9 @@ namespace PlayerVoting
             //help
             if (args.Parameters[0] == "help" || args.Parameters[0] == "HELP")
             {
-                args.Player.SendInfoMessage("输入 /vote kick [name] 来投票踢人");
-                args.Player.SendInfoMessage("输入 /vote kick [name] [second] 来投票踢人，second指踢走后阻止他再次进入服务器的时间，单位 秒");
-                args.Player.SendInfoMessage("输入 /vote ban [name] 来投票踢人");
+                args.Player.SendInfoMessage("输入 /vote kick [name] 来投票踢掉玩家");
+                args.Player.SendInfoMessage("输入 /vote kick [name] [second] 来投票踢人，second 指踢走后禁止让他再次进入服务器的时间，单位秒");
+                args.Player.SendInfoMessage("输入 /vote ban [name] 来投票封禁玩家");
                 args.Player.SendInfoMessage("输入 /vote yes 或 /vote y 来投赞成票");
                 args.Player.SendInfoMessage("输入 /vote no 或 /vote n 来投反对票");
                 return;
@@ -384,7 +384,6 @@ namespace PlayerVoting
                 }
                 return;
             }
-
             args.Player.SendInfoMessage("输入 /clearv help 来查看帮助");
         }
 

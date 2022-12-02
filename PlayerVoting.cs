@@ -30,9 +30,6 @@ namespace PlayerVoting
         public override void Initialize()
         {
             config = Config.LoadConfig();
-            //ServerApi.Hooks.PlayerUpdatePhysics.Register(this, WhenPlayerUpdate);
-            //GetDataHandlers.PlayerUpdate.Register(WhenPlayerUpdate);
-            //Hooks.Player.PreUpdate += OnPreUpdate;
             //计算投票和判定的情况
             ServerApi.Hooks.GameUpdate.Register(this, OnGameUpdate);
             //给未投人发信息
@@ -58,8 +55,6 @@ namespace PlayerVoting
         {
             if (disposing)
             {
-                //ServerApi.Hooks.PlayerUpdatePhysics.Deregister(this, WhenPlayerUpdate);
-                //Hooks.Player.PreUpdate -= OnPreUpdate;
                 ServerApi.Hooks.GameUpdate.Deregister(this, OnGameUpdate);
                 ServerApi.Hooks.GameUpdate.Deregister(this, OnGameUpdate2);
                 ServerApi.Hooks.ServerJoin.Deregister(this, OnServerjoin);
