@@ -40,9 +40,14 @@ namespace PlayerVoting
 
 
             //指令
-            Commands.ChatCommands.Add(new Command("playervote.vote", Vote, "vote", "VOTE")
+            Commands.ChatCommands.Add(new Command("playervote.vote", Vote, "vote")
             {
                 HelpText = "输入 /vote help 来查看帮助"
+            });
+
+            Commands.ChatCommands.Add(new Command("playervote.supervote", SVote, "svote")
+            {
+                HelpText = "输入 /svote help 来查看帮助"
             });
 
             Commands.ChatCommands.Add(new Command("playervote.clearv", ClearVotePlayer, "clearv", "CLEARV")
