@@ -10,11 +10,17 @@
 - 指令1.4: /vote ban name   【发起投票ban掉某人】
 - 指令1.5: /vote yes 或 /vote y       【在投票进行时，投出赞成票】
 - 指令1.6: /vote no 或 /vote n       【在投票进行时，投出反对票】
+- 指令1.7: /vote event string     【向大家询问一些问题，投票观察赞成率】
+- 指令1.8: /vote num [数字]      【生成一个随机数，如果 [数字] 不填，范围[0,100]，否则范围[0,数字]】
 -
-- 权限2: playervote.clearv
-- 指令2.1: /clearv help  【查询这类指令的帮助】
-- 指令2.2: /clearv kick name    【清除被踢玩家的进服时间阻碍】
-- 指令2.3: /clearv kickall    【清除所有被踢玩家的进服时间阻碍】
+- 权限2: playervote.supervote
+- 指令2.1: /svote kick name time   【发起投票踢掉离线的某人，并且在time秒内，该玩家不能再次进入服务器，即时间阻碍】
+- 指令2.2: /svote ban name   【发起投票ban掉离线的某人】
+-
+- 权限3: playervote.clearv
+- 指令3.1: /clearv help  【查询这类指令的帮助】
+- 指令3.2: /clearv kick name    【清除被踢玩家的进服时间阻碍】
+- 指令3.3: /clearv kickall    【清除所有被踢玩家的进服时间阻碍】
 
 # 配置文件
 ```
@@ -28,7 +34,7 @@
     "default",
     "vip"
   ],
-  "CountdownToVoting_投票倒计时": 15                            //每个投票活动倒计时，单位秒
+  "CountdownToVoting_投票倒计时": 20                            //每个投票活动倒计时，单位秒
 }
 ```
 
@@ -37,3 +43,7 @@
 - 踢人也增对uuid进行踢，可自定义阻碍被踢者进服的时间
 - 可通过配置文件自定义投票时间限制，通过率，限制人数，限制被踢的用户组等
 - 投票记录写入tshock日志，直接搜索“投票”关键字即可，不记名投票
+- 游客无权投票
+- 即使被投出的玩家在结果出来前逃走，vote kick time 和 vote ban 都依然有效，仍可以限制和封禁
+- svote 系列的投票能够直接封禁或阻碍不在线的玩家，但是必须全员通过才会起效，发起人数遵循文件配置
+- event 活动不限制人数不遵循文件配置，仅是统计大家意见而已
